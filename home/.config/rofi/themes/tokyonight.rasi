@@ -1,0 +1,99 @@
+/*
+ * Rofi Theme: Tokyo Night
+ */
+
+configuration {
+  font: "JetBrainsMono Nerd Font Mono 12";
+
+  drun {
+    display-name: "";
+  }
+
+  run {
+    display-name: "";
+  }
+
+
+  timeout {
+    delay: 10;
+    action: "kb-cancel";
+  }
+}
+
+* {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  spacing: 0;
+
+  bg:        #1a1b26;
+  bg-alt:    #232433;
+  fg:        #6a6f87;
+  fg-alt:    #a9b1d6;
+  mauve:     #cba6f7;
+
+  background-color: @bg;
+  text-color:       @fg;
+}
+
+window {
+  transparency: "real";
+  width: 35%;
+  background-color: @mauve;
+  border: 4px;
+}
+
+mainbox {
+  children: [inputbar, listview];
+}
+
+inputbar {
+  background-color: @bg-alt;
+  children: [prompt, entry];
+}
+
+prompt {
+  background-color: inherit;
+  padding: 8px;
+}
+
+entry {
+  background-color: inherit;
+  padding: 8px 3px;
+}
+
+listview {
+  lines: 8;
+  spacing: 3px;
+  layout: vertical;
+}
+
+element {
+  children: [element-icon, element-text];
+  spacing: 10px;
+  padding: 3px 10px;
+}
+
+element-icon {
+  padding: 5px 10px;
+  size: 18px;
+}
+
+element-text {
+  padding: 2px 10px;
+  margin-left: 2px;
+}
+
+element selected {
+  background-color: #414868;
+  text-color: #c0caf5;
+}
+
+element-text selected {
+  background-color: inherit;
+  text-color: #c0caf5;
+}
+
+element-icon selected {
+  background-color: inherit;
+}

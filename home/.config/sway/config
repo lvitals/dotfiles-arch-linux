@@ -1,0 +1,227 @@
+### ───────────────────────────────
+### 📦 Required Packages (install with pkg)
+### ───────────────────────────────
+
+# pkg install sway
+# pkg install mako              # For notify-send (notifications)
+# pkg install grim              # Screenshot utility
+# pkg install slurp             # Area selection for screenshots
+# pkg install wl-clipboard      # Copy images to clipboard
+# pkg install swaylock          # Screen locker
+# pkg install rofi              # Application launcher menu
+# pkg install alacritty         # Terminal emulator
+# pkg install sndio             # Audio control with sndioctl
+# pkg install backlight         # Screen brightness control (hardware dependent)
+
+### ───────────────────────────────
+### 🎨 Appearance and Themes
+### ───────────────────────────────
+
+include ~/.config/sway/themes/catppuccin-mocha
+
+font pango:JetBrains Mono 10
+
+client.focused          $mauve $base $mauve $surface0 $text
+client.unfocused        $surface0 $base $surface0 $base $overlay1
+client.focused_inactive $overlay0 $base $overlay0 $base $overlay1
+client.urgent           $red $base $red $surface0 $crust
+client.background       $base
+
+#output * bg ~/.config/sway/wallpapers/dragon-knight.png fill
+#output * bg ~/.config/sway/wallpapers/tokyonight.jpg fill
+#output '*' bg '#00263f' solid_color
+
+# Uncomment to enable dynamic wallpapers with swww-daemon
+exec_always {
+   swww-daemon
+   swww img ~/.config/sway/wallpapers/pixel-jeff-mario.gif --transition-type grow --transition-duration 1
+}
+
+bar {
+    position top
+    status_command ~/.config/sway/scripts/status.sh
+    colors {
+        statusline $text
+        background $base
+        inactive_workspace $surface0 $surface0 $subtext0
+        active_workspace $surface1 $lavender $text
+        focused_workspace $mauve $mauve $crust
+        urgent_workspace $red $red $base
+    }
+}
+
+### ───────────────────────────────
+### 🔠 Keyboard and Input
+### ───────────────────────────────
+
+input * {
+    xkb_layout "br"
+    xkb_model "thinkpad"
+    repeat_delay 250
+    repeat_rate 30
+}
+
+input type:touchpad {
+    tap enabled                # Tap to click enabled
+    natural_scroll disabled    # Disable natural scrolling (like on phones)
+    dwt enabled                # Disable touchpad while typing
+    middle_emulation enabled   # Middle button emulation by clicking two buttons
+    pointer_accel 0.5          # Cursor acceleration (0 = none)
+    scroll_method two_finger   # Two-finger scroll
+}
+
+### ───────────────────────────────
+### ⚙️ Variables
+### ───────────────────────────────
+
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term foot
+set $menu rofi -show drun
+
+### ───────────────────────────────
+### ⌨️ Keybindings
+### ───────────────────────────────
+
+# Applications
+bindsym $mod+Return exec $term
+bindsym $mod+d exec $menu
+bindsym $mod+Tab exec rofi -show window
+bindsym $mod+Shift+f exec rofi -show filebrowser
+
+# System
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec ~/.config/sway/scripts/powermenu.sh
+bindsym $mod+F1 exec ~/.config/sway/scripts/shortcuts.sh
+bindsym $mod+Alt+l exec swaylock --color 000000
+
+# Window focus movement
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move windows
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Layouts
+bindsym $mod+b splith
+bindsym $mod+v splitv
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Workspaces
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10
+
+# Resize mode
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# Multimedia keys
+bindsym --locked XF86AudioMute exec "exec pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym --locked XF86AudioLowerVolume exec "exec pactl set-sink-volume @DEFAULT_SINK@ -5%"
+bindsym --locked XF86AudioRaiseVolume exec "exec pactl set-sink-volume @DEFAULT_SINK@ +5%"
+bindsym --locked XF86AudioMicMute exec "exec pactl set-source-mute @DEFAULT_SOURCE@ toggle"
+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 10%-
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set +10%
+
+# Screenshots
+bindsym Print exec bash -c 'file=~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png; grim "$file" && notify-send -t 5000 "Screenshot saved" "$file"'
+bindsym Shift+Print exec bash -c 'file=~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png; grim -g "$(slurp)" "$file" && notify-send -t 5000 "Area captured" "$file"'
+bindsym Ctrl+Print exec bash -c 'grim -g "$(slurp)" - | wl-copy && notify-send -t 5000 "Screenshot" "Area copied to clipboard"'
+bindsym Ctrl+Shift+Print exec bash -c 'grim - | wl-copy && notify-send -t 5000 "Screenshot" "Full screen copied to clipboard"'
+
+### ───────────────────────────────
+### ⚙️ Services and Daemons
+### ───────────────────────────────
+
+# Notification daemon compatible with Wayland
+exec mako
+
+# XWayland support
+xwayland enable
+
+### ───────────────────────────────
+### 🖥️ Multi-monitor Configuration
+### ───────────────────────────────
+
+# Use `swaymsg -t get_outputs` to verify actual output names and resolutions
+
+set $internal eDP-1
+set $external HDMI-A-1
+
+workspace 1 output $internal
+workspace 2 output $external
+
+# Internal display (laptop)
+output $internal {
+    pos 0 0
+    # mode 1920x1080
+    scale 1.0
+    transform normal
+}
+
+# External VGA monitor to the right of the internal screen
+output $external {
+    pos 1920 0
+    # mode 2560x1600
+    scale 1.6
+    transform normal
+    # background ~/.config/sway/wallpapers/vga.png fill
+}

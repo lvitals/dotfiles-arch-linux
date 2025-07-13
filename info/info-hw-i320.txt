@@ -1,0 +1,298 @@
+Hardware Report - HOSTNAME_REDACTED
+Generated on: dom 13 jul 2025 20:08:34 -03
+------------------------------------------
+
+[ Hostname ]
+HOSTNAME_REDACTED
+
+[ System Information ]
+Linux HOSTNAME_REDACTED 6.15.6-arch1-1 #1 SMP PREEMPT_DYNAMIC Thu, 10 Jul 2025 17:10:18 +0000 x86_64 GNU/Linux
+
+[ CPU ]
+Arquitetura:                               x86_64
+Modo(s) operacional da CPU:                32-bit, 64-bit
+Tamanhos de endereço:                      39 bits physical, 48 bits virtual
+Ordem dos bytes:                           Little Endian
+CPU(s):                                    4
+Lista de CPU(s) on-line:                   0-3
+ID de fornecedor:                          GenuineIntel
+Nome do modelo:                            Intel(R) Core(TM) i7-7500U CPU @ 2.70GHz
+Família da CPU:                            6
+Modelo:                                    142
+Thread(s) per núcleo:                      2
+Núcleo(s) por soquete:                     2
+Soquete(s):                                1
+Step:                                      9
+CPU(s) MHz de escala:                      91%
+CPU MHz máx.:                              3500,0000
+CPU MHz mín.:                              400,0000
+BogoMIPS:                                  5799,77
+Opções:                                    fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault pti ssbd ibrs ibpb stibp tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust sgx bmi1 avx2 smep bmi2 erms invpcid mpx rdseed adx smap clflushopt intel_pt xsaveopt xsavec xgetbv1 xsaves dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp vnmi md_clear flush_l1d arch_capabilities
+Virtualização:                             VT-x
+cache de L1d:                              64 KiB (2 instâncias)
+cache de L1i:                              64 KiB (2 instâncias)
+cache de L2:                               512 KiB (2 instâncias)
+cache de L3:                               4 MiB (1 instância)
+Nó(s) de NUMA:                             1
+CPU(s) de nó0 NUMA:                        0-3
+Vulnerabilidade Gather data sampling:      Mitigation; Microcode
+Vulnerabilidade Ghostwrite:                Not affected
+Vulnerabilidade Indirect target selection: Not affected
+Vulnerabilidade Itlb multihit:             KVM: Mitigation: Split huge pages
+Vulnerabilidade L1tf:                      Mitigation; PTE Inversion; VMX conditional cache flushes, SMT vulnerable
+Vulnerabilidade Mds:                       Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerabilidade Meltdown:                  Mitigation; PTI
+Vulnerabilidade Mmio stale data:           Mitigation; Clear CPU buffers; SMT vulnerable
+Vulnerabilidade Reg file data sampling:    Not affected
+Vulnerabilidade Retbleed:                  Mitigation; IBRS
+Vulnerabilidade Spec rstack overflow:      Not affected
+Vulnerabilidade Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerabilidade Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerabilidade Spectre v2:                Mitigation; IBRS; IBPB conditional; STIBP conditional; RSB filling; PBRSB-eIBRS Not affected; BHI Not affected
+Vulnerabilidade Srbds:                     Mitigation; Microcode
+Vulnerabilidade Tsa:                       Not affected
+Vulnerabilidade Tsx async abort:           Not affected
+
+[ Memory ]
+               total       usada       livre    compart.  buff/cache  disponível
+Mem.:           15Gi       4,9Gi       587Mi       1,7Gi        11Gi        10Gi
+Swap:          4,0Gi        48Mi       4,0Gi
+
+[ Disks ]
+NAME     SIZE TYPE MOUNTPOINT
+sda    223,6G disk 
+├─sda1     1G part /boot
+└─sda2 222,6G part /
+sdb    931,5G disk 
+└─sdb1 931,5G part /home
+zram0      4G disk [SWAP]
+
+[ Filesystems ]
+Sist. Arq.     Tipo      Tam. Usado Disp. Uso% Montado em
+dev            devtmpfs  7,7G     0  7,7G   0% /dev
+run            tmpfs     7,8G  1,4M  7,7G   1% /run
+efivarfs       efivarfs  108K   76K   28K  74% /sys/firmware/efi/efivars
+/dev/sda2      btrfs     223G   12G  210G   6% /
+tmpfs          tmpfs     7,8G  335M  7,4G   5% /dev/shm
+tmpfs          tmpfs     1,0M     0  1,0M   0% /run/credentials/systemd-journald.service
+tmpfs          tmpfs     7,8G   47M  7,7G   1% /tmp
+/dev/sdb1      btrfs     932G   32G  899G   4% /home
+/dev/sda1      vfat     1022M  216M  807M  22% /boot
+tmpfs          tmpfs     1,0M     0  1,0M   0% /run/credentials/systemd-networkd.service
+tmpfs          tmpfs     1,0M     0  1,0M   0% /run/credentials/systemd-resolved.service
+tmpfs          tmpfs     1,0M     0  1,0M   0% /run/credentials/getty@tty1.service
+tmpfs          tmpfs     1,6G   24K  1,6G   1% /run/user/1000
+
+[ Network Interfaces ]
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet XXX.XXX.XXX.XXX/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 XXX:XXX:XXX:XXX:XXX/128 scope host noprefixroute 
+       valid_lft forever preferred_lft forever
+2: enp2s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether XX:XX:XX:XX:XX:XX brd ff:ff:ff:ff:ff:ff
+    altname enx641c678c3877
+    inet XXX.XXX.XXX.XXX/24 metric 1024 brd 192.168.3.255 scope global dynamic enp2s0
+       valid_lft 85899sec preferred_lft 85899sec
+    inet6 XXX:XXX:XXX:XXX:XXX/64 scope global dynamic mngtmpaddr noprefixroute 
+       valid_lft 6732sec preferred_lft 3132sec
+    inet6 XXX:XXX:XXX:XXX:XXX/64 scope global deprecated dynamic mngtmpaddr noprefixroute 
+       valid_lft 6713sec preferred_lft 0sec
+    inet6 XXX:XXX:XXX:XXX:XXX/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+4: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+    link/ether XX:XX:XX:XX:XX:XX brd ff:ff:ff:ff:ff:ff
+    inet XXX.XXX.XXX.XXX/24 metric 1024 brd 192.168.3.255 scope global dynamic wlan0
+       valid_lft 85948sec preferred_lft 85948sec
+    inet6 XXX:XXX:XXX:XXX:XXX/64 scope global dynamic mngtmpaddr noprefixroute 
+       valid_lft 6746sec preferred_lft 3146sec
+    inet6 XXX:XXX:XXX:XXX:XXX/64 scope link proto kernel_ll 
+       valid_lft forever preferred_lft forever
+
+[ PCI Devices ]
+00:00.0 Host bridge [0600]: Intel Corporation Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers [8086:5904] (rev 02)
+00:02.0 VGA compatible controller [0300]: Intel Corporation HD Graphics 620 [8086:5916] (rev 02)
+00:14.0 USB controller [0c03]: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller [8086:9d2f] (rev 21)
+00:14.2 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Thermal subsystem [8086:9d31] (rev 21)
+00:15.0 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #0 [8086:9d60] (rev 21)
+00:16.0 Communication controller [0780]: Intel Corporation Sunrise Point-LP CSME HECI #1 [8086:9d3a] (rev 21)
+00:17.0 SATA controller [0106]: Intel Corporation Sunrise Point-LP SATA Controller [AHCI mode] [8086:9d03] (rev 21)
+00:1c.0 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #1 [8086:9d10] (rev f1)
+00:1c.4 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #5 [8086:9d14] (rev f1)
+00:1c.5 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 [8086:9d15] (rev f1)
+00:1f.0 ISA bridge [0601]: Intel Corporation Sunrise Point LPC/eSPI Controller [8086:9d4e] (rev 21)
+00:1f.2 Memory controller [0580]: Intel Corporation Sunrise Point-LP PMC [8086:9d21] (rev 21)
+00:1f.3 Audio device [0403]: Intel Corporation Sunrise Point-LP HD Audio [8086:9d71] (rev 21)
+00:1f.4 SMBus [0c05]: Intel Corporation Sunrise Point-LP SMBus [8086:9d23] (rev 21)
+01:00.0 3D controller [0302]: NVIDIA Corporation GM108M [GeForce 940MX] [10de:134d] (rev a2)
+02:00.0 Ethernet controller [0200]: Realtek Semiconductor Co., Ltd. RTL8111/8168/8211/8411 PCI Express Gigabit Ethernet Controller [10ec:8168] (rev 10)
+03:00.0 Network controller [0280]: Qualcomm Atheros QCA9377 802.11ac Wireless Network Adapter [168c:0042] (rev 31)
+
+[ USB Devices ]
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 0a05:7211 Unknown Manufacturer hub
+Bus 001 Device 003: ID 0cf3:e500 Qualcomm Atheros Communications 
+Bus 001 Device 004: ID 174f:116a Syntek EasyCamera
+Bus 001 Device 005: ID 046d:c548 Logitech, Inc. Logi Bolt Receiver
+Bus 001 Device 006: ID 046d:c548 Logitech, Inc. Logi Bolt Receiver
+Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+
+[ Kernel Modules ]
+Module                  Size  Used by
+uinput                 24576  0
+uhid                   28672  1
+hid_nintendo           53248  0
+ff_memless             20480  1 hid_nintendo
+rfcomm                102400  4
+bnep                   36864  2
+snd_seq_dummy          12288  0
+snd_hrtimer            12288  1
+snd_seq               135168  7 snd_seq_dummy
+snd_seq_device         16384  1 snd_seq
+ccm                    20480  6
+algif_aead             12288  0
+crypto_null            16384  1 algif_aead
+des3_ede_x86_64        45056  0
+des_generic            12288  0
+libdes                 20480  2 des_generic,des3_ede_x86_64
+algif_skcipher         12288  1
+cmac                   12288  3
+md4                    12288  0
+algif_hash             16384  1
+af_alg                 32768  7 algif_hash,algif_skcipher,algif_aead
+intel_rapl_msr         20480  0
+intel_rapl_common      53248  1 intel_rapl_msr
+intel_uncore_frequency    12288  0
+intel_uncore_frequency_common    16384  1 intel_uncore_frequency
+intel_pmc_core_pltdrv    12288  0
+intel_pmc_core        139264  0
+pmt_telemetry          16384  1 intel_pmc_core
+pmt_class              16384  1 pmt_telemetry
+intel_vsec             20480  1 intel_pmc_core
+intel_tcc_cooling      12288  0
+snd_hda_codec_hdmi     90112  1
+x86_pkg_temp_thermal    16384  0
+snd_soc_avs           245760  0
+intel_powerclamp       20480  0
+snd_soc_hda_codec      28672  1 snd_soc_avs
+coretemp               20480  0
+snd_hda_ext_core       36864  2 snd_soc_avs,snd_soc_hda_codec
+kvm_intel             434176  0
+snd_soc_core          425984  2 snd_soc_avs,snd_soc_hda_codec
+snd_ctl_led            28672  0
+snd_compress           28672  2 snd_soc_avs,snd_soc_core
+snd_hda_codec_realtek   221184  1
+kvm                  1388544  1 kvm_intel
+snd_hda_codec_generic   114688  1 snd_hda_codec_realtek
+ac97_bus               12288  1 snd_soc_core
+snd_hda_scodec_component    20480  1 snd_hda_codec_realtek
+snd_pcm_dmaengine      16384  1 snd_soc_core
+irqbypass              12288  1 kvm
+ath10k_pci             65536  0
+snd_hda_intel          69632  1
+polyval_clmulni        12288  0
+ath10k_core           782336  1 ath10k_pci
+uvcvideo              188416  0
+snd_intel_dspcfg       40960  2 snd_soc_avs,snd_hda_intel
+polyval_generic        12288  1 polyval_clmulni
+nvidia_drm            143360  4
+ghash_clmulni_intel    16384  0
+snd_intel_sdw_acpi     16384  1 snd_intel_dspcfg
+videobuf2_vmalloc      20480  1 uvcvideo
+btusb                  81920  0
+sha512_ssse3           53248  0
+ath                    40960  1 ath10k_core
+snd_hda_codec         217088  6 snd_hda_codec_generic,snd_soc_avs,snd_hda_codec_hdmi,snd_soc_hda_codec,snd_hda_intel,snd_hda_codec_realtek
+nvidia_modeset       1843200  1 nvidia_drm
+sha1_ssse3             32768  0
+iTCO_wdt               16384  0
+drm_ttm_helper         16384  1 nvidia_drm
+snd_hda_core          143360  8 snd_hda_codec_generic,snd_soc_avs,snd_hda_codec_hdmi,snd_soc_hda_codec,snd_hda_intel,snd_hda_ext_core,snd_hda_codec,snd_hda_codec_realtek
+aesni_intel           106496  8
+btrtl                  32768  1 btusb
+uvc                    12288  1 uvcvideo
+intel_pmc_bxt          16384  1 iTCO_wdt
+pkcs8_key_parser       12288  0
+crypto_simd            16384  1 aesni_intel
+videobuf2_memops       16384  1 videobuf2_vmalloc
+mac80211             1650688  1 ath10k_core
+iTCO_vendor_support    12288  1 iTCO_wdt
+r8169                 131072  0
+btintel                73728  1 btusb
+snd_hwdep              24576  1 snd_hda_codec
+videobuf2_v4l2         40960  1 uvcvideo
+cryptd                 28672  3 crypto_simd,ghash_clmulni_intel
+btbcm                  24576  1 btusb
+videobuf2_common       94208  4 videobuf2_vmalloc,videobuf2_v4l2,uvcvideo,videobuf2_memops
+nvidia_uvm           3874816  0
+rapl                   20480  0
+snd_pcm               212992  8 snd_soc_avs,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_compress,snd_soc_core,snd_hda_core,snd_pcm_dmaengine
+i2c_i801               40960  0
+btmtk                  32768  1 btusb
+realtek                49152  1
+snd_timer              57344  3 snd_seq,snd_hrtimer,snd_pcm
+intel_cstate           20480  0
+libarc4                12288  1 mac80211
+mei_pxp                20480  0
+mei_hdcp               28672  0
+bluetooth            1101824  38 btrtl,btmtk,btintel,btbcm,bnep,btusb,rfcomm
+intel_uncore          266240  0
+wmi_bmof               12288  0
+pcspkr                 12288  0
+i2c_smbus              20480  1 i2c_i801
+cfg80211             1400832  3 ath,mac80211,ath10k_core
+mdio_devres            12288  1 r8169
+intel_wmi_thunderbolt    16384  0
+snd                   155648  17 snd_ctl_led,snd_hda_codec_generic,snd_seq,snd_seq_device,snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_hda_codec,snd_hda_codec_realtek,snd_timer,snd_compress,snd_soc_core,snd_pcm
+libphy                233472  3 r8169,mdio_devres,realtek
+i2c_mux                16384  1 i2c_i801
+videodev              397312  2 videobuf2_v4l2,uvcvideo
+soundcore              16384  2 snd_ctl_led,snd
+mei_me                 57344  2
+mc                     90112  4 videodev,videobuf2_v4l2,uvcvideo,videobuf2_common
+intel_lpss_pci         28672  0
+mei                   200704  5 mei_hdcp,mei_pxp,mei_me
+intel_xhci_usb_role_switch    12288  0
+i2c_hid_acpi           12288  0
+intel_lpss             12288  1 intel_lpss_pci
+intel_pch_thermal      20480  0
+i2c_hid                45056  1 i2c_hid_acpi
+idma64                 20480  0
+roles                  16384  1 intel_xhci_usb_role_switch
+elan_i2c               77824  0
+ideapad_laptop         53248  0
+platform_profile       16384  1 ideapad_laptop
+sparse_keymap          12288  1 ideapad_laptop
+vfat                   24576  1
+rfkill                 45056  6 bluetooth,ideapad_laptop,cfg80211
+fat                   110592  1 vfat
+joydev                 24576  0
+mousedev               28672  0
+pinctrl_sunrisepoint    28672  0
+acpi_pad              184320  0
+mac_hid                12288  0
+nvidia              112238592  11 nvidia_uvm,nvidia_drm,nvidia_modeset
+dm_mod                229376  0
+loop                   40960  0
+nfnetlink              20480  2
+zram                   65536  1
+842_decompress         16384  1 zram
+842_compress           24576  1 zram
+lz4hc_compress         20480  1 zram
+lz4_compress           24576  1 zram
+ip_tables              36864  0
+x_tables               65536  1 ip_tables
+hid_multitouch         36864  0
+i915                 4763648  99
+i2c_algo_bit           24576  1 i915
+drm_buddy              24576  1 i915
+ttm                   118784  2 drm_ttm_helper,i915
+intel_gtt              28672  1 i915
+sha256_ssse3           36864  0
+drm_display_helper    274432  1 i915
+serio_raw              20480  0
+cec                    90112  2 drm_display_helper,i915
+video                  81920  3 ideapad_laptop,i915,nvidia_modeset
+wmi                    32768  4 video,intel_wmi_thunderbolt,wmi_bmof,ideapad_laptop
+
