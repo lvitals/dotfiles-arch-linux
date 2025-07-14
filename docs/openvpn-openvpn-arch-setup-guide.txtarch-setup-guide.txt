@@ -1,0 +1,235 @@
+===================================================
+      OpenVPN Client Setup Guide for Arch Linux
+===================================================
+
+Version: 1.0
+Last Updated: 2025-07-14
+
+-------------------------
+--[ 1. Introduction ]--
+-------------------------
+
+This guide provides step-by-step instructions for
+configuring an OpenVPN client on Arch Linux. It covers
+installing the necessary software, setting up the
+configuration files, and creating a systemd service
+to manage the connection automatically.
+
+
+---------------------------
+--[ 2. Prerequisites ]--
+---------------------------
+
+Before you begin, ensure you have the following:
+- An Arch Linux system with an active internet connection.
+- Sudo (administrator) privileges.
+- The required VPN configuration files provided by your
+  administrator. These typically include:
+    - A .ovpn file (the main configuration)
+    - A Certificate Authority file (e.g., ca.crt)
+    - A client certificate file (e.g., client.crt)
+    - A client private key file (e.g., client.key)
+
+
+-------------------------
+--[ 3. Installation ]--
+-------------------------
+
+3.1. Install OpenVPN
+--------------------
+Install the core OpenVPN package using pacman.
+
+    sudo pacman -S openvpn systemd-resolved
+
+
+3.2. Install DNS Helper Script
+------------------------------
+To ensure DNS queries are correctly routed through the VPN
+tunnel, a helper script from the Arch User Repository (AUR)
+is recommended.
+
+First, install the tools needed to build AUR packages:
+
+    sudo pacman -S --needed git base-devel
+
+Next, clone the repository, build, and install the package:
+
+    git clone https://aur.archlinux.org/openvpn-update-resolv-conf-git.git
+    cd openvpn-update-resolv-conf-git
+    makepkg -si
+    cd ..
+
+This installs the script to /etc/openvpn/update-resolv-conf.
+
+
+--------------------------
+--[ 4. Configuration ]--
+--------------------------
+
+4.1. Organize Configuration Files
+---------------------------------
+It is best practice to store each VPN configuration
+in its own dedicated directory.
+
+Choose a descriptive name for your configuration, for
+example, "my-vpn".
+
+Create the directory:
+
+    CONFIG_NAME="my-vpn"
+    sudo mkdir -p "/etc/openvpn/client/${CONFIG_NAME}"
+
+Copy all your provided files (.crt, .key, .ovpn) into
+this new directory:
+
+    sudo cp client.crt client.key ca.crt my-vpn.ovpn \
+    "/etc/openvpn/client/${CONFIG_NAME}/"
+
+
+4.2. Create Credentials File
+----------------------------
+To avoid typing your username and password every time,
+you can store them in a file.
+
+Create the credentials file:
+
+    CONFIG_NAME="my-vpn"
+    sudo nano "/etc/openvpn/client/${CONFIG_NAME}/auth.txt"
+
+Add your username on the first line and your password
+on the second line inside the file:
+
+    your_username
+    your_password
+
+Set strict file permissions for security (VERY IMPORTANT):
+
+    sudo chmod 600 "/etc/openvpn/client/${CONFIG_NAME}/auth.txt"
+
+
+4.3. Edit the .ovpn Configuration File
+--------------------------------------
+Edit your main .ovpn file to use absolute paths and to
+include the directives needed for automation.
+
+Open the file for editing:
+
+    sudo nano "/etc/openvpn/client/my-vpn/my-vpn.ovpn"
+
+Ensure your file looks similar to this template. Pay close
+attention to the paths and script directives. Remember to
+replace "my-vpn" with your chosen configuration name.
+
+    # --- Start of Template ---
+    client
+    dev tun
+    proto udp
+
+    # Replace with your server's address and port
+    remote your.server.address.com 1194
+
+    # Generic directives for stability
+    persist-key
+    persist-tun
+    keepalive 10 120
+    remote-cert-tls server
+    comp-lzo
+
+    # Run as a non-privileged user after connection
+    user nobody
+    group nobody
+
+    # Use absolute paths for all key/cert files
+    ca /etc/openvpn/client/my-vpn/ca.crt
+    cert /etc/openvpn/client/my-vpn/client.crt
+    key /etc/openvpn/client/my-vpn/client.key
+
+    # Point to the credentials file
+    auth-user-pass /etc/openvpn/client/my-vpn/auth.txt
+
+    # Allow scripts to be run
+    script-security 2
+
+    # DNS helper scripts
+    up /etc/openvpn/update-resolv-conf
+    down /etc/openvpn/update-resolv-conf
+
+    Note: The following line may be required for older servers that use
+    # weak ciphers. It reduces security. Try connecting without it first.
+    # If you get a "ca md too weak" error, try SECLEVEL=1. Use SECLEVEL=0
+    # only as a last resort.
+    # tls-cipher "DEFAULT:@SECLEVEL=1"
+    
+    # --- End of Template ---
+
+
+------------------------------------
+--[ 5. Create the systemd Service ]--
+------------------------------------
+
+Create a systemd service file to manage the connection.
+
+Create the service file:
+
+    sudo nano /etc/systemd/system/openvpn-client@.service
+
+Paste the following content. This is a generic template
+that works for any configuration in /etc/openvpn/client/.
+
+    [Unit]
+    Description=OpenVPN client connection for %i
+    After=network-online.target
+    Wants=network-online.target
+
+    [Service]
+    Type=simple
+    ExecStart=/usr/sbin/openvpn --config /etc/openvpn/client/%i.ovpn
+    Restart=on-failure
+    RestartSec=5s
+
+    [Install]
+    WantedBy=multi-user.target
+
+
+-----------------------------------
+--[ 6. Manage the VPN Service ]--
+-----------------------------------
+
+Manage the VPN using systemctl. Replace "my-vpn" with
+the name of your configuration file (e.g., my-vpn.ovpn).
+
+Reload the systemd daemon to find the new service:
+
+    sudo systemctl daemon-reload
+
+Enable the service to start automatically on boot:
+
+    sudo systemctl enable openvpn-client@my-vpn.service
+
+Start the service immediately:
+
+    sudo systemctl start openvpn-client@my-vpn.service
+
+Check the status of the service:
+
+    sudo systemctl status openvpn-client@my-vpn.service
+
+To stop the service:
+
+    sudo systemctl stop openvpn-client@my-vpn.service
+
+
+-----------------------------
+--[ 7. Troubleshooting ]--
+-----------------------------
+
+If the service fails, use `journalctl` to see the logs
+from OpenVPN.
+
+View logs for your specific service (replace "my-vpn"):
+
+    sudo journalctl -u openvpn-client@my-vpn.service
+
+To follow the logs in real-time:
+
+    sudo journalctl -u openvpn-client@my-vpn.service -f
