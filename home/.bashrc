@@ -7,6 +7,8 @@
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias sway='dbus-run-session sway'
+
 PS1='[\u@\h \W]\$ '
 
 EDITOR=nano;   	export EDITOR

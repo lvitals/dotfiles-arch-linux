@@ -192,10 +192,11 @@ bindsym Ctrl+Shift+Print exec bash -c 'grim - | wl-copy && notify-send -t 5000 "
 ### ───────────────────────────────
 
 # Notification daemon compatible with Wayland
-exec mako
+exec mako &
 
-# XWayland support
-xwayland enable
+# Automount daemon for removable devices
+exec udiskie &
+
 
 ### ───────────────────────────────
 ### 🖥️ Multi-monitor Configuration

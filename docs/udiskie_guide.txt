@@ -1,0 +1,127 @@
+======================================================================
+     DEFINITIVE GUIDE: AUTOMATIC DEVICE MOUNTING IN SWAY WITH ARCH LINUX
+======================================================================
+
+Last updated: July 14, 2025
+
+This guide details the process for achieving seamless, automatic mounting of
+removable storage devices (USB flash drives, external HDDs, SD cards) in a
+minimal Arch Linux environment running the Sway Wayland compositor.
+
+-----------------------------------------
+1. THE THEORY: UNDERSTANDING THE COMPONENTS
+-----------------------------------------
+
+For mounting to work, several pieces must cooperate. Think of it like a restaurant:
+
+  * udisks2 (The Kitchen): This is the system service (daemon) that does the
+    heavy lifting. It knows how to talk to the Linux kernel and understands
+    partitions, but it needs orders to act.
+
+  * Filesystem Drivers (The Ingredients): The kitchen (udisks2) can't prepare a dish
+    without the right ingredients. To mount an NTFS disk, it needs ntfs-3g. For
+    FAT32, it needs dosfstools, and so on.
+
+  * udiskie (The Automatic Waiter): In a minimal environment, there's no one to give
+    orders to the kitchen. udiskie is a lightweight utility that runs in your
+    user session. It watches for new devices and takes the order ("mount this
+    device for my user") to the kitchen (udisks2).
+
+  * DBus (The Order System): This is the communication system that allows the
+    waiter (udiskie) to send standardized requests to the kitchen (udisks2).
+    Without it, the communication fails.
+
+-------------------------------------------
+2. INSTALLATION AND CONFIGURATION (STEP-BY-STEP)
+-------------------------------------------
+
+    Step 2.1: Install the Base Utilities
+    ------------------------------------
+    Install the system service, the automount utility, and a notification
+    system (recommended).
+
+    Command:
+        sudo pacman -S udisks2 udiskie libnotify
+
+    Step 2.2: Install Filesystem Drivers
+    ------------------------------------
+    This is a crucial step. Install the drivers for the filesystems you
+    intend to use.
+
+    * For NTFS (common for Windows external HDDs):
+        sudo pacman -S ntfs-3g
+
+    * For FAT32/VFAT (common for older USB drives and SD cards):
+        sudo pacman -S dosfstools
+
+    * For exFAT (common for modern USB drives and high-capacity SD cards):
+        sudo pacman -S exfatprogs
+
+    Tip: Install all three to ensure maximum compatibility.
+
+    Step 2.3: Configure Sway to Launch udiskie
+    -------------------------------------------
+    udiskie must be started along with your graphical session.
+
+    1. Open your Sway configuration file:
+        nano ~/.config/sway/config
+
+    2. Add the following line:
+        # Start the automount daemon for removable devices
+        exec udiskie &
+
+    Step 2.4: (THE CRITICAL STEP) Ensure Sway Starts Correctly
+    ----------------------------------------------------------
+    The most common reason for failure is udiskie being unable to
+    communicate via DBus.
+
+    1. Instead of just typing `sway` to start your environment from a TTY,
+       you must use the `dbus-run-session` wrapper:
+        dbus-run-session sway
+
+    2. For convenience, create an alias in your ~/.bashrc or ~/.zshrc:
+        # ~/.bashrc or ~/.zshrc
+        alias sway="dbus-run-session sway"
+
+       After adding the alias, run `source ~/.bashrc` (or the corresponding file),
+       and from then on, you can just type `sway` to start your session correctly.
+
+---------------------------
+3. VERIFICATION AND USAGE
+---------------------------
+
+  1. Verify it's running:
+     After logging into your session, open a terminal and run:
+        ps aux | grep udiskie
+     You should see a udiskie process running (and not just the grep process).
+
+  2. Usage:
+     Simply plug in a device. It will be automatically mounted under
+     /run/media/your_user/DEVICE_NAME, and you will receive a notification.
+
+---------------------------------------------
+4. ADVANCED CONFIGURATION & TIPS (OPTIONAL)
+---------------------------------------------
+
+For finer control, such as adjusting mount permissions, create a
+configuration file for udiskie:
+
+File:
+    ~/.config/udiskie/config.yml
+
+Example Content:
+    # ~/.config/udiskie/config.yml
+    program_options:
+      notify: true # Enable notifications
+
+    device_config:
+      # Ensures your user owns files on NTFS/FAT drives
+      - id_type: ntfs
+        mount_options: ["uid=$UID", "gid=$GID", "permissions"]
+      - id_type: vfat
+        mount_options: ["uid=$UID", "gid=$GID"]
+
+======================================================================
+With this setup, your Arch Linux + Sway environment will be perfectly
+equipped to handle any storage device automatically and efficiently.
+======================================================================

@@ -47,13 +47,13 @@ selecionado=$(echo -e "$opcoes" | rofi -dmenu -p "" \
 # Ações com base na opção selecionada
 case "$selecionado" in
     *Desligar*)
-        shutdown -p now
+        systemctl poweroff
         ;;
     *Reiniciar*)
-        shutdown -r now
+        systemctl reboot
         ;;
     *Suspender*)
-        acpiconf -s 3
+        systemctl suspend
         ;;
     *Sair*)
         swaymsg exit
