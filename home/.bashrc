@@ -18,3 +18,5 @@ PAGER=less;  	export PAGER
 if [ "$(tty)" = "/dev/tty1" ]; then
   exec sway -d > /tmp/sway.log 2>&1
 fi
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"

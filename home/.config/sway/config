@@ -44,7 +44,7 @@ bar {
         statusline $text
         background $base
         inactive_workspace $surface0 $surface0 $subtext0
-        active_workspace $surface1 $lavender $text
+        active_workspace $surface1 $lavender $crust
         focused_workspace $mauve $mauve $crust
         urgent_workspace $red $red $base
     }
@@ -207,22 +207,28 @@ exec udiskie &
 set $internal eDP-1
 set $external HDMI-A-1
 
-workspace 1 output $internal
-workspace 2 output $external
+exec_always ~/.config/sway/scripts/monitor-config.sh --position right --monitor $internal --scale 1.3 --monitor $external --scale 1.6
+bindsym $mod+Ctrl+h exec ~/.config/sway/scripts/monitor-config.sh --position left
+bindsym $mod+Ctrl+l exec ~/.config/sway/scripts/monitor-config.sh --position right
+bindsym $mod+Ctrl+k exec ~/.config/sway/scripts/monitor-config.sh --position top
+bindsym $mod+Ctrl+j exec ~/.config/sway/scripts/monitor-config.sh --position bottom
+
+# workspace 1 output $internal
+# workspace 2 output $external
 
 # Internal display (laptop)
-output $internal {
-    pos 0 0
-    # mode 1920x1080
-    scale 1.0
-    transform normal
-}
+# output $internal {
+#    pos 0 0
+#    mode 1920x1080
+#    scale 1.2
+#    transform normal
+# }
 
 # External VGA monitor to the right of the internal screen
-output $external {
-    pos 1920 0
-    # mode 2560x1600
-    scale 1.6
-    transform normal
-    # background ~/.config/sway/wallpapers/vga.png fill
-}
+# output $external {
+#     pos 1600 0
+#     mode 2560x1600
+#     scale 1.6
+#     transform normal
+#     background ~/.config/sway/wallpapers/vga.png fill
+# }
