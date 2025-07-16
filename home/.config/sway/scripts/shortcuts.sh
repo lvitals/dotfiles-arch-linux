@@ -52,7 +52,13 @@ shortcut_data_string="\
  Próxima;XF86AudioNext
  Brilho +/-;XF86MonBrightnessUp/Down
  Recarregar config;$mod+Shift+C
- Reiniciar sway;$mod+Shift+R"
+ Reiniciar sway;$mod+Shift+R
+ Monitor esquerda;$mod+Ctrl+h
+ Monitor direita;$mod+Ctrl+l
+ Monitor topo;$mod+Ctrl+k
+ Monitor baixo;$mod+Ctrl+j
+"
+
 
 # Descobre o maior tamanho da primeira coluna (em caracteres)
 maxlen=0
